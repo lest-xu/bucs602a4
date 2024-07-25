@@ -62,7 +62,26 @@ function incomeTax($taxableIncome, $status) {
 
 	// check the income in the range
 	foreach ($ranges as $key => $value) {
-		# code...
+	    $nextKey = array_key_exists($key+1, $ranges) ? $ranges[$key+1] : null;
+    	
+    	if ($nextKey) {
+    	    //echo "\n key: ". $key ." value: " . $value . " - " . $ranges[$key+1] . " > " . $taxableIncome;
+    	    if ($taxableIncome > $value && $taxableIncome <= $ranges[$key+1]) {
+    			 # $incTax = ($taxableIncome - 970) * 0.12 + 970;
+    			 echo $incTax." = (".$taxableIncome." - ".$value.") * ".($rates[$key] / 100)." + " . $minTax[$key];
+        		//echo "key: ". $key ." value: " . $value;
+                
+    			$incTax = (($taxableIncome - $value) * ($rates[$key] / 100)) + $minTax[$key];
+		    }
+    	} else {
+    	    if ($taxableIncome > $value ) {
+    			# $incTax = ($taxableIncome - 970) * 0.12 + 970;
+        		//echo "key: ". $key ." value: " . $value;
+                
+    			$incTax = (($taxableIncome - $value) * ($rates[$key] / 100)) + $value;
+		    }
+    	}
+		
 	}
     
     return $incTax;
