@@ -170,7 +170,6 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
             echo "<p>With a net taxable income of $". number_format($inputIncome,2) ."</p>";
             // calculate the income
             $resultSingle = number_format(incomeTaxSingle($inputIncome),2);
-            $resultSingle = number_format($resultSingle,2);
             $resultMarriedJ = number_format(incomeTaxMarriedJointly($inputIncome),2);
             $resultMarriedS = number_format(incomeTaxMarriedSeparately($inputIncome),2);
             $resultHead= number_format(incomeTaxHeadOfHousehold($inputIncome),2);
@@ -178,10 +177,10 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
             // create html table for results
             echo "<table class='table table-striped'>";
             echo    "<thead> <tr> <th>Status</th> <th>Tax</th> </tr> </thead><tbody>";
-            echo    "<tr> <td>Single</td> <td>".$resultSingle."</td> </tr>";
-            echo    "<tr> <td>Married Failling Jointly</td> <td>".$resultMarriedJ."</td> </tr>";
-            echo    "<tr> <td>Married Filling Separately</td> <td>".$resultMarriedS."</td> </tr>";
-            echo    "<tr> <td>Head of Household</td> <td>".$resultHead."</td> </tr>";
+            echo    "<tr> <td>Single</td> <td>$".$resultSingle."</td> </tr>";
+            echo    "<tr> <td>Married Failling Jointly</td> <td>$".$resultMarriedJ."</td> </tr>";
+            echo    "<tr> <td>Married Filling Separately</td> <td>$".$resultMarriedS."</td> </tr>";
+            echo    "<tr> <td>Head of Household</td> <td>$".$resultHead."</td> </tr>";
             echo " </tbody></table>";
 
         }
