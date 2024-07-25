@@ -2,9 +2,10 @@
 
 // Fill in the code for the following four functions
 
-
+// Single
 function incomeTaxSingle($taxableIncome) {
     $incTax = 0.0;
+
     if ($taxableIncome > 0 && $taxableIncome <= 9700) {
         # 10% of income
         return $incTax = $taxableIncome * 0.1;
@@ -31,26 +32,95 @@ function incomeTaxSingle($taxableIncome) {
     return $incTax;
 }
 
+// Married Failling Jointly or Qualifying Widow (Windower)
 function incomeTaxMarriedJointly($taxableIncome) {
     $incTax = 0.0;
-
+    
+    if ($taxableIncome > 0 && $taxableIncome <= 19400) {
+        # 10% of income
+        return $incTax = $taxableIncome * 0.1;
+    } else if ($taxableIncome > 19400 && $taxableIncome <= 78950) {
+        # 12% of income + 1940
+        return $incTax = $taxableIncome * 0.12 + 1940;
+    } else if ($taxableIncome > 78950 && $taxableIncome <= 168400) {
+        # 22% of income + 9086
+        return $incTax = $taxableIncome * 0.22 + 9086;
+    } else if ($taxableIncome > 168400 && $taxableIncome <= 321450) {
+        # 24% of income + 28765
+        return $incTax = $taxableIncome * 0.24 + 28765;
+    } else if ($taxableIncome > 321450 && $taxableIncome <= 408200) {
+        # 32% of income + 65497
+        return $incTax = $taxableIncome * 0.32 + 65497;
+    } else if ($taxableIncome > 408200 && $taxableIncome <= 612350) {
+        # 35% of income + 93257
+        return $incTax = $taxableIncome * 0.35 + 93257;
+    }  else if ($taxableIncome > 612350) {
+        # 37% of income + 164709
+        return $incTax = $taxableIncome * 0.37 + 164709;
+    } 
     
     return $incTax;
 
 }
 
+// Married Filling Separately
 function incomeTaxMarriedSeparately($taxableIncome) {
     $incTax = 0.0;
-
+    
+    if ($taxableIncome > 0 && $taxableIncome <= 9700) {
+        # 10% of income
+        return $incTax = $taxableIncome * 0.1;
+    } else if ($taxableIncome > 9700 && $taxableIncome <= 39475) {
+        # 12% of income + 970
+        return $incTax = $taxableIncome * 0.12 + 970;
+    } else if ($taxableIncome > 39475 && $taxableIncome <= 84200) {
+        # 22% of income + 4543
+        return $incTax = $taxableIncome * 0.22 + 4543;
+    } else if ($taxableIncome > 84200 && $taxableIncome <= 160725) {
+        # 24% of income + 14382.5
+        return $incTax = $taxableIncome * 0.24 + 14382.5;
+    } else if ($taxableIncome > 160725 && $taxableIncome <= 204100) {
+        # 32% of income + 32748.5
+        return $incTax = $taxableIncome * 0.32 + 32748.5;
+    } else if ($taxableIncome > 204100 && $taxableIncome <= 306175) {
+        # 35% of income + 46628.5
+        return $incTax = $taxableIncome * 0.35 + 46628.5;
+    }  else if ($taxableIncome > 306175) {
+        # 37% of income + 82354.75
+        return $incTax = $taxableIncome * 0.37 + 82354.75;
+    } 
     
     return $incTax;
 
 }
 
+// Head of Household
 function incomeTaxHeadOfHousehold($taxableIncome) {
     $incTax = 0.0;
-
     
+    if ($taxableIncome > 0 && $taxableIncome <= 13850) {
+        # 10% of income
+        return $incTax = $taxableIncome * 0.1;
+    } else if ($taxableIncome > 13850 && $taxableIncome <= 52850) {
+        # 12% of income + 1385
+        return $incTax = $taxableIncome * 0.12 + 1385;
+    } else if ($taxableIncome > 52850 && $taxableIncome <= 84200) {
+        # 22% of income + 6065
+        return $incTax = $taxableIncome * 0.22 + 6065;
+    } else if ($taxableIncome > 84200 && $taxableIncome <= 160700) {
+        # 24% of income + 12962
+        return $incTax = $taxableIncome * 0.24 + 12962;
+    } else if ($taxableIncome > 160700 && $taxableIncome <= 204100) {
+        # 32% of income + 31322
+        return $incTax = $taxableIncome * 0.32 + 31322;
+    } else if ($taxableIncome > 204100 && $taxableIncome <= 510300) {
+        # 35% of income + 45210
+        return $incTax = $taxableIncome * 0.35 + 45210;
+    }  else if ($taxableIncome > 510300) {
+        # 37% of income + 152380
+        return $incTax = $taxableIncome * 0.37 + 152380;
+    } 
+
     return $incTax;
 
 }
