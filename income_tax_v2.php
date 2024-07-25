@@ -80,7 +80,7 @@ function incomeTax($taxableIncome, $status) {
 
             echo "Results...";
 
-            echo $TAX_RATES['Single']['Ranges'];
+            echo TAX_RATES['Single']['Ranges'];
 
 
         }
