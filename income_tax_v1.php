@@ -182,7 +182,7 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
             echo    "<tr> <td>Married Failling Jointly</td> <td>".$resultMarriedJ."</td> </tr>";
             echo    "<tr> <td>Married Filling Separately</td> <td>".$resultMarriedS."</td> </tr>";
             echo    "<tr> <td>Head of Household</td> <td>".$resultHead."</td> </tr>";
-            echo " </tbody></table>"
+            echo " </tbody></table>";
 
         }
 
