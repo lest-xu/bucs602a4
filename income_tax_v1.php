@@ -11,22 +11,22 @@ function incomeTaxSingle($taxableIncome) {
         $incTax = $taxableIncome * 0.1;
     } else if ($taxableIncome > 9700 && $taxableIncome <= 39475) {
         # 12% of income + 970
-        $incTax = $taxableIncome * 0.12 + 970;
+        $incTax = ($taxableIncome - 970) * 0.12 + 970;
     } else if ($taxableIncome > 39475 && $taxableIncome <= 84200) {
         # 22% of income + 4543
-        $incTax = $taxableIncome * 0.22 + 4543;
+        $incTax = ($taxableIncome - 39475) * 0.22 + 4543;
     } else if ($taxableIncome > 84200 && $taxableIncome <= 160725) {
         # 24% of income + 14382
-        $incTax = $taxableIncome * 0.24 + 14382;
+        $incTax = ($taxableIncome - 84200) * 0.24 + 14382;
     } else if ($taxableIncome > 160725 && $taxableIncome <= 204100) {
         # 32% of income + 32748
-        $incTax = $taxableIncome * 0.32 + 32748;
+        $incTax = ($taxableIncome - 160725) * 0.32 + 32748;
     } else if ($taxableIncome > 204100 && $taxableIncome <= 510300) {
         # 35% of income + 46628
-        $incTax = $taxableIncome * 0.35 + 46628;
+        $incTax = ($taxableIncome - 204100) * 0.35 + 46628;
     }  else if ($taxableIncome > 510300) {
         # 37% of income + 46628
-        $incTax = $taxableIncome * 0.37 + 153798;
+        $incTax = ($taxableIncome - 510300) * 0.37 + 153798;
     } 
 
     return $incTax;
