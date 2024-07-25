@@ -43,7 +43,7 @@ function incomeTax($taxableIncome, $status) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HW4 Part2 - LastName</title>
+    <title>HW4 Part2 - XU</title>
 
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
