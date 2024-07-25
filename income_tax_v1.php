@@ -166,23 +166,23 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
         if(isset($_POST['netIncome'])) {
 
             // get income from input
-            $inputIncome = number_format($_POST['netIncome'],2);
-            echo "<p>With a net taxable income of".$inputIncome;
+            $inputIncome = $_POST['netIncome'],2);
+            echo "<p>With a net taxable income of $". number_format($inputIncome,2) ."</p>";
             // calculate the income
-            $resultSingle = incomeTaxSingle($inputIncome);
+            $resultSingle = number_format(incomeTaxSingle($inputIncome),2);
             $resultSingle = number_format($resultSingle,2);
             $resultMarriedJ = number_format(incomeTaxMarriedJointly($inputIncome),2);
             $resultMarriedS = number_format(incomeTaxMarriedSeparately($inputIncome),2);
             $resultHead= number_format(incomeTaxHeadOfHousehold($inputIncome),2);
 
             // create html table for results
-            echo "<table class='table table-striped'>"
-            echo    "<thead> <tr> <th>Status</th> <th>Tax</th> </tr> </thead>"
-            echo    "<tbody> <tr> <td>Single</td> <td>".$resultSingle."</td> </tr> </tbody>"
-            echo    "<tbody> <tr> <td>Married Failling Jointly</td> <td>".$resultMarriedJ."</td> </tr> </tbody>"
-            echo    "<tbody> <tr> <td>Married Filling Separately</td> <td>".$resultMarriedS."</td> </tr> </tbody>"
-            echo    "<tbody> <tr> <td>Head of Household</td> <td>".$resultHead."</td> </tr> </tbody>"
-            echo "</table>"
+            echo "<table class='table table-striped'>";
+            echo    "<thead> <tr> <th>Status</th> <th>Tax</th> </tr> </thead><tbody>";
+            echo    "<tr> <td>Single</td> <td>".$resultSingle."</td> </tr>";
+            echo    "<tr> <td>Married Failling Jointly</td> <td>".$resultMarriedJ."</td> </tr>";
+            echo    "<tr> <td>Married Filling Separately</td> <td>".$resultMarriedS."</td> </tr>";
+            echo    "<tr> <td>Head of Household</td> <td>".$resultHead."</td> </tr>";
+            echo " </tbody></table>"
 
         }
 
