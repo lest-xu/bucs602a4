@@ -167,7 +167,7 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
 
             // get income from input
             $inputIncome = number_format($_POST['netIncome'],2);
-            echo "<p>With a net taxable income of".$inputIncome
+            echo "<p>With a net taxable income of".$inputIncome;
             // calculate the income
             $resultSingle = incomeTaxSingle($inputIncome);
             $resultSingle = number_format($resultSingle,2);
