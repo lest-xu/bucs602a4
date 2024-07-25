@@ -30,7 +30,40 @@ define('TAX_RATES',
 function incomeTax($taxableIncome, $status) {
 
     $incTax = 0.0;
+    $rates = [];
+    $ranges = [];
+    $minTax = [];
 
+	// check the status
+    switch ($status) {
+      case 'Single':
+        $rates = TAX_RATES['Single']['Rates'];
+        $ranges = TAX_RATES['Single']['Ranges'];
+        $minTax = TAX_RATES['Single']['MinTax'];
+        break;
+     case 'Married_Jointly':
+        $rates = TAX_RATES['Married_Jointly']['Rates'];
+        $ranges = TAX_RATES['Married_Jointly']['Ranges'];
+        $minTax = TAX_RATES['Married_Jointly']['MinTax'];
+        break;
+     case 'Married_Separately':
+        $rates = TAX_RATES['Married_Jointly']['Rates'];
+        $ranges = TAX_RATES['Married_Jointly']['Ranges'];
+        $minTax = TAX_RATES['Married_Jointly']['MinTax'];
+        break;
+     case 'Head_Household':
+        $rates = TAX_RATES['Married_Jointly']['Rates'];
+        $ranges = TAX_RATES['Married_Jointly']['Ranges'];
+        $minTax = TAX_RATES['Married_Jointly']['MinTax'];
+        break;
+    default:
+        break;
+    }
+
+	// check the income in the range
+	foreach ($ranges as $key => $value) {
+		# code...
+	}
     
     return $incTax;
 }
@@ -41,38 +74,39 @@ function incomeTax($taxableIncome, $status) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>HW4 Part2 - XU</title>
+	<meta charset="UTF-8">
+	<title>HW4 Part2 - XU</title>
 
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-<div class="container">
+	<div class="container">
 
-    <h3>Income Tax Calculator</h3>
+		<h3>Income Tax Calculator</h3>
 
-    <form class="form-horizontal" method="post">
+		<form class="form-horizontal" method="post">
 
-      <div class="form-group">
-        <label class="control-label col-sm-2">Enter Net Income:</label>
-        <div class="col-sm-10">
-          <input type="number"  step="any" name="netIncome" placeholder="Taxable  Income" required autofocus>
-        </div>
-      </div>
-      <div class="form-group"> 
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
+			<div class="form-group">
+				<label class="control-label col-sm-2">Enter Net Income:</label>
+				<div class="col-sm-10">
+					<input type="number" step="any" name="netIncome" placeholder="Taxable  Income" required autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
 
-    </form>
+		</form>
 
-    <?php
+		<?php
 
         // Fill in the rest of the PHP code for form submission results
 
@@ -87,11 +121,11 @@ function incomeTax($taxableIncome, $status) {
 
     ?>
 
-    
 
-    <h3>2019 Tax Tables</h3>
 
-    <?php
+		<h3>2019 Tax Tables</h3>
+
+		<?php
 
       // Fill in the code for Tax Tables display
 
@@ -99,9 +133,10 @@ function incomeTax($taxableIncome, $status) {
 
     ?>
 
-   
-       
-</div>
+
+
+	</div>
 
 </body>
+
 </html>
