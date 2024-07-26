@@ -141,12 +141,12 @@ function incomeTax($taxableIncome, $status) {
 					
 					if ($nextKey) {
 						if ($key == 0) {
-							echo    "<tr> <td>".$ranges[$key]." - ".$ranges[$key+1]."</td> <td>".$rates[$key]."%</td> </tr>";
+							echo "<tr> <td>".$ranges[$key]." - ".$ranges[$key+1]."</td> <td>".$rates[$key]."%</td> </tr>";
 						} else {
-							echo    "<tr> <td>".$ranges[$key]. " - ".$ranges[$key+1]."</td> <td>$".$minTax[$key]." plus ".$rates[$key]."% of the amount over $".$ranges[$key]."</td> </tr>";
+							echo "<tr> <td>".$ranges[$key]. " - ".$ranges[$key+1]."</td> <td>$".$minTax[$key]." plus ".$rates[$key]."% of the amount over $".$ranges[$key]."</td> </tr>";
 						}
 					} else {
-						echo    "<tr> <td>".$ranges[$key]. " or more </td> <td>$".$minTax[$key]." plus ".$rates[$key]."% of the amount over $".$ranges[$key]."</td> </tr>";
+						echo "<tr> <td>".$ranges[$key]. " or more </td> <td>$".$minTax[$key]." plus ".$rates[$key]."% of the amount over $".$ranges[$key]."</td> </tr>";
 					}
 					
 					// foreach ($subVal as $subKey2 =>$subVal2) {
