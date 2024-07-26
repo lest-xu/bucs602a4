@@ -42,7 +42,7 @@ function incomeTax($taxableIncome, $status) {
 
 		// find the income in the tax range
 	   if ($taxableIncome > $ranges[$i]) {
-		   echo $incTax." = (".$taxableIncome." - ".$ranges[$i].") * ".($rates[$i] / 100)." + " . $minTax[$i];
+		   // echo $incTax." = (".$taxableIncome." - ".$ranges[$i].") * ".($rates[$i] / 100)." + " . $minTax[$i];
 		   // calculate the income tax
 		   $incTax =  (($taxableIncome - $ranges[$i]) * ($rates[$i] / 100)) + $minTax[$i];
 		   break;
@@ -110,7 +110,7 @@ function incomeTax($taxableIncome, $status) {
 			 echo    "<tr> <td>Married Failling Jointly</td> <td>$".$resultMarriedJ."</td> </tr>";
 			 echo    "<tr> <td>Married Filling Separately</td> <td>$".$resultMarriedS."</td> </tr>";
 			 echo    "<tr> <td>Head of Household</td> <td>$".$resultHead."</td> </tr>";
-			 echo "</tbody></table>";
+			 echo "</tbody></table><br/>";
 
         }
 
@@ -123,41 +123,73 @@ function incomeTax($taxableIncome, $status) {
 		<?php
 
     	// Fill in the code for Tax Tables display
-
-    	echo "Tax Tables...";
-
 	  
-		foreach (TAX_RATES as $key => $value) {
-			echo "\n\n Key: ". $key ." Value Length: " . count($value);
-			 // create html table for results
-			echo "<h4>".$key."</h4>";
+        // set mondy format for table output
+        setlocale(LC_MONETARY, 'en_US.UTF-8');
+
+		foreach (TAX_RATES as $status => $statusVal) {
+
+            // define the rates, ranges and minTax as empty array
+            $rates = [];
+            $ranges = [];
+            $minTax = [];
+
+             // check the value of the tax status 
+             foreach ($statusVal as $key => $value) {
+                switch ($key) {
+                    case 'Rates':
+                        // get rates from constant array
+                        $rates = TAX_RATES[$status][$key];
+                        break;
+                    case 'Ranges':
+                        // get ranges from constant array
+                        $ranges = TAX_RATES[$status][$key];
+                        break;
+                    case 'MinTax':
+                        // get min tax from constant array
+                        $minTax = TAX_RATES[$status][$key];
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            }
+            
+			// echo "\n\n Status: ". $status .", Value Length: " . count($statusVal);
+			// create html table for results
+			echo "<h4>".$status."</h4>";
 			echo "<table class='table table-striped'>";
 			echo    "<thead> <tr> <th>Texable Income</th> <th>Tax Rate</th> </tr> </thead><tbody>";
-			foreach ($value as $subKey => $subVal) {
-				// echo "\n SubKey: ". $subKey ." SubValue Length: " . count($subVal);
-					
-				if ($subKey == 'Ranges') {
-					$nextKey = array_key_exists($key+1, $ranges) ? $ranges[$key+1] : null;
-					
-					if ($nextKey) {
-						if ($key == 0) {
-							echo "<tr> <td>".$ranges[$key]." - ".$ranges[$key+1]."</td> <td>".$rates[$key]."%</td> </tr>";
-						} else {
-							echo "<tr> <td>".$ranges[$key]. " - ".$ranges[$key+1]."</td> <td>$".$minTax[$key]." plus ".$rates[$key]."% of the amount over $".$ranges[$key]."</td> </tr>";
-						}
-					} else {
-						echo "<tr> <td>".$ranges[$key]. " or more </td> <td>$".$minTax[$key]." plus ".$rates[$key]."% of the amount over $".$ranges[$key]."</td> </tr>";
-					}
-					
-					// foreach ($subVal as $subKey2 =>$subVal2) {
-					// 	echo "\n val: " . $subVal[$subKey2];
-					// }
-				}
+			
+            // loop through the ranges
+
+            foreach ($ranges as $i => $rangeVal) {
+				// echo "\n Range index: ". $i ." Range Val: " . $rangeVal;
+
+                // check if the next index exists
+                $nextIndex = array_key_exists($i+1, $ranges) ? ($i+1) : null;
+                
+                if ($nextIndex) {
+                    // check if its the first row
+                    if ($i == 0) {
+                        echo "<tr> <td>".moneyFormat($ranges[$i])." - ".moneyFormat($ranges[$nextIndex])."</td> <td>".$rates[$i]."%</td> </tr>";
+                    } else {
+                        echo "<tr> <td>".moneyFormat($ranges[$i]+1). " - ".moneyFormat($ranges[$nextIndex])."</td> <td>".moneyFormat($minTax[$i])." plus ".$rates[$i]."% of the amount over ".moneyFormat($ranges[$i])."</td> </tr>";
+                    }
+                } else {
+                    // check if its the last row
+                    echo "<tr> <td>".moneyFormat($ranges[$i]+1). " or more </td> <td>".moneyFormat($minTax[$i])." plus ".$rates[$i]."% of the amount over ".moneyFormat($ranges[$i])."</td> </tr>";
+                }
+                    
 			}
 			
+            echo "</tbody></table><br/>";
 		}
 	
-
+        //// HELPER FUNCTIONS
+        function moneyFormat($val) {
+            return '$'.number_format($val, 2);
+        }
     ?>
 
 
