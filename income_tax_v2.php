@@ -60,6 +60,25 @@ function incomeTax($taxableIncome, $status) {
         break;
     }
 
+
+    foreach (TAX_RATES as $key => $value) {
+        echo "\n\n Key: ". $key ." Value Length: " . count($value);
+        
+        if ($key == $status) { 
+            foreach ($value as $subKey => $subVal) {
+                echo "\n SubKey: ". $subKey ." SubValue Length: " . count($subVal);
+                
+                if ($subKey == 'Ranges') {
+                    
+                    foreach ($subVal as $subKey2 =>$subVal2) {
+                        echo "\n val: " . $subVal[$subKey2];
+                    }
+                }
+            }
+        }
+        
+    }
+
 	// check the income in the range
 	foreach ($ranges as $key => $value) {
 		// get the next index key
