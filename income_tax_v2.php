@@ -172,13 +172,13 @@ function incomeTax($taxableIncome, $status) {
                 if ($nextIndex) {
                     // check if its the first row
                     if ($i == 0) {
-                        echo "<tr> <td>".moneyFormat($ranges[$i])." - ".moneyFormat($ranges[$nextIndex])."</td> <td>".$rates[$i]."%</td> </tr>";
+                        echo "<tr> <td>".moneyFormatZero($ranges[$i])." - ".moneyFormatZero($ranges[$nextIndex])."</td> <td>".$rates[$i]."%</td> </tr>";
                     } else {
-                        echo "<tr> <td>".moneyFormat($ranges[$i]+1). " - ".moneyFormat($ranges[$nextIndex])."</td> <td>".moneyFormat($minTax[$i])." plus ".$rates[$i]."% of the amount over ".moneyFormat($ranges[$i])."</td> </tr>";
+                        echo "<tr> <td>".moneyFormatZero($ranges[$i]+1). " - ".moneyFormatZero($ranges[$nextIndex])."</td> <td>".moneyFormatZero($minTax[$i])." plus ".$rates[$i]."% of the amount over ".moneyFormatZero($ranges[$i])."</td> </tr>";
                     }
                 } else {
                     // check if its the last row
-                    echo "<tr> <td>".moneyFormat($ranges[$i]+1). " or more </td> <td>".moneyFormat($minTax[$i])." plus ".$rates[$i]."% of the amount over ".moneyFormat($ranges[$i])."</td> </tr>";
+                    echo "<tr> <td>".moneyFormatZero($ranges[$i]+1). " or more </td> <td>".moneyFormatZero($minTax[$i])." plus ".$rates[$i]."% of the amount over ".moneyFormatZero($ranges[$i])."</td> </tr>";
                 }
                     
 			}
@@ -189,6 +189,10 @@ function incomeTax($taxableIncome, $status) {
         //// HELPER FUNCTIONS
         function moneyFormat($val) {
             return '$'.number_format($val, 2);
+        }
+
+        function moneyFormatZero($val) {
+            return '$'.number_format($val, 0);
         }
     ?>
 
