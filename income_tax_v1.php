@@ -167,7 +167,7 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
 
             // get income from input
             $inputIncome = $_POST['netIncome'];
-            echo "<p>With a net taxable income of $". moneyFormat($inputIncome) ."</p>";
+            echo "<p>With a net taxable income of ". moneyFormat($inputIncome) ."</p>";
             // calculate the income
             $resultSingle = moneyFormat(incomeTaxSingle($inputIncome));
             $resultMarriedJ = moneyFormat(incomeTaxMarriedJointly($inputIncome));
@@ -177,10 +177,10 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
             // create html table for results
             echo "<table class='table table-striped'>";
             echo    "<thead> <tr> <th>Status</th> <th>Tax</th> </tr> </thead><tbody>";
-            echo    "<tr> <td>Single</td> <td>$".$resultSingle."</td> </tr>";
-            echo    "<tr> <td>Married Failling Jointly</td> <td>$".$resultMarriedJ."</td> </tr>";
-            echo    "<tr> <td>Married Filling Separately</td> <td>$".$resultMarriedS."</td> </tr>";
-            echo    "<tr> <td>Head of Household</td> <td>$".$resultHead."</td> </tr>";
+            echo    "<tr> <td>Single</td> <td>".$resultSingle."</td> </tr>";
+            echo    "<tr> <td>Married Failling Jointly</td> <td>".$resultMarriedJ."</td> </tr>";
+            echo    "<tr> <td>Married Filling Separately</td> <td>".$resultMarriedS."</td> </tr>";
+            echo    "<tr> <td>Head of Household</td> <td>".$resultHead."</td> </tr>";
             echo " </tbody></table>";
 
         }
