@@ -127,10 +127,23 @@ function incomeTax($taxableIncome, $status) {
 
         if(isset($_POST['netIncome'])) {
 
-            echo "Results...";
-
-            echo TAX_RATES['Single']['Ranges'];
-
+             // get income from input
+			 $inputIncome = $_POST['netIncome'];
+			 echo "<p>With a net taxable income of $". number_format($inputIncome,2) ."</p>";
+			 // calculate the income
+			 $resultSingle = number_format(incomeTax($inputIncome, 'Single'),2);
+			 $resultMarriedJ = number_format(incomeTax($inputIncome, 'Married_Jointly'),2);
+			 $resultMarriedS = number_format(incomeTax($inputIncome, 'Married_Separately'),2);
+			 $resultHead= number_format(incomeTax($inputIncome, 'Head_Household'),2);
+ 
+			 // create html table for results
+			 echo "<table class='table table-striped'>";
+			 echo    "<thead> <tr> <th>Status</th> <th>Tax</th> </tr> </thead><tbody>";
+			 echo    "<tr> <td>Single</td> <td>$".$resultSingle."</td> </tr>";
+			 echo    "<tr> <td>Married Failling Jointly</td> <td>$".$resultMarriedJ."</td> </tr>";
+			 echo    "<tr> <td>Married Filling Separately</td> <td>$".$resultMarriedS."</td> </tr>";
+			 echo    "<tr> <td>Head of Household</td> <td>$".$resultHead."</td> </tr>";
+			 echo " </tbody></table>";
 
         }
 
