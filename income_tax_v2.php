@@ -30,76 +30,24 @@ define('TAX_RATES',
 function incomeTax($taxableIncome, $status) {
 
     $incTax = 0.0;
-    $rates = [];
-    $ranges = [];
-    $minTax = [];
+   // get rates from constant array
+   $rates = TAX_RATES[$status]['Rates'];
+   // get ranges from constant array
+   $ranges = TAX_RATES[$status]['Ranges'];
+   // get min tax from constant array
+   $minTax = TAX_RATES[$status]['MinTax'];
+   
+   // loop through the ranges from the highest to the lowest to find the income tax range
+   for ($i = count($ranges) - 1; $i >= 0; $i--) {
 
-	// check the status
-    switch ($status) {
-      case 'Single':
-        $rates = TAX_RATES['Single']['Rates'];
-        $ranges = TAX_RATES['Single']['Ranges'];
-        $minTax = TAX_RATES['Single']['MinTax'];
-        break;
-     case 'Married_Jointly':
-        $rates = TAX_RATES['Married_Jointly']['Rates'];
-        $ranges = TAX_RATES['Married_Jointly']['Ranges'];
-        $minTax = TAX_RATES['Married_Jointly']['MinTax'];
-        break;
-     case 'Married_Separately':
-        $rates = TAX_RATES['Married_Jointly']['Rates'];
-        $ranges = TAX_RATES['Married_Jointly']['Ranges'];
-        $minTax = TAX_RATES['Married_Jointly']['MinTax'];
-        break;
-     case 'Head_Household':
-        $rates = TAX_RATES['Married_Jointly']['Rates'];
-        $ranges = TAX_RATES['Married_Jointly']['Ranges'];
-        $minTax = TAX_RATES['Married_Jointly']['MinTax'];
-        break;
-    default:
-        break;
-    }
-
-
-    foreach (TAX_RATES as $key => $value) {
-        echo "\n\n Key: ". $key ." Value Length: " . count($value);
-        
-        if ($key == $status) { 
-            foreach ($value as $subKey => $subVal) {
-                echo "\n SubKey: ". $subKey ." SubValue Length: " . count($subVal);
-                
-                if ($subKey == 'Ranges') {
-                    
-                    foreach ($subVal as $subKey2 =>$subVal2) {
-                        echo "\n val: " . $subVal[$subKey2];
-                    }
-                }
-            }
-        }
-        
-    }
-
-	// check the income in the range
-	foreach ($ranges as $key => $value) {
-		// get the next index key
-	    $nextKey = array_key_exists($key+1, $ranges) ? $ranges[$key+1] : null;
-
-    	// check the next index key
-    	if ($nextKey) {
-			
-			// check the income range
-    	    if ($taxableIncome > $value && $taxableIncome <= $ranges[$key+1]) {
-    			// echo $incTax." = (".$taxableIncome." - ".$value.") * ".($rates[$key] / 100)." + " . $minTax[$key];
-    			$incTax = (($taxableIncome - $value) * ($rates[$key] / 100)) + $minTax[$key];
-		    }
-    	} else {
-			// the max band of income
-    	    if ($taxableIncome > $value ) {
-    			$incTax = (($taxableIncome - $value) * ($rates[$key] / 100)) + $minTax[$key];
-		    }
-    	}
-		
-	}
+		// find the income in the tax range
+	   if ($taxableIncome > $ranges[$i]) {
+		   echo $incTax." = (".$taxableIncome." - ".$ranges[$i].") * ".($rates[$i] / 100)." + " . $minTax[$i];
+		   // calculate the income tax
+		   $incTax =  (($taxableIncome - $ranges[$i]) * ($rates[$i] / 100)) + $minTax[$i];
+		   break;
+	   }
+   }
     
     return $incTax;
 }
@@ -174,9 +122,29 @@ function incomeTax($taxableIncome, $status) {
 
 		<?php
 
-      // Fill in the code for Tax Tables display
+    	// Fill in the code for Tax Tables display
 
-      echo "Tax Tables...";
+    	echo "Tax Tables...";
+
+	  
+		foreach (TAX_RATES as $key => $value) {
+			echo "\n\n Key: ". $key ." Value Length: " . count($value);
+			
+			if ($key == $status) { 
+				foreach ($value as $subKey => $subVal) {
+					echo "\n SubKey: ". $subKey ." SubValue Length: " . count($subVal);
+					
+					if ($subKey == 'Ranges') {
+						
+						foreach ($subVal as $subKey2 =>$subVal2) {
+							echo "\n val: " . $subVal[$subKey2];
+						}
+					}
+				}
+			}
+			
+		}
+	
 
     ?>
 
