@@ -110,7 +110,7 @@ function incomeTax($taxableIncome, $status) {
 			 echo    "<tr> <td>Married Failling Jointly</td> <td>$".$resultMarriedJ."</td> </tr>";
 			 echo    "<tr> <td>Married Filling Separately</td> <td>$".$resultMarriedS."</td> </tr>";
 			 echo    "<tr> <td>Head of Household</td> <td>$".$resultHead."</td> </tr>";
-			 echo " </tbody></table>";
+			 echo "</tbody></table>";
 
         }
 
@@ -129,17 +129,29 @@ function incomeTax($taxableIncome, $status) {
 	  
 		foreach (TAX_RATES as $key => $value) {
 			echo "\n\n Key: ". $key ." Value Length: " . count($value);
-			
-			if ($key == $status) { 
-				foreach ($value as $subKey => $subVal) {
-					echo "\n SubKey: ". $subKey ." SubValue Length: " . count($subVal);
+			 // create html table for results
+			echo "<h4>".$key."</h4>";
+			echo "<table class='table table-striped'>";
+			echo    "<thead> <tr> <th>Texable Income</th> <th>Tax Rate</th> </tr> </thead><tbody>";
+			foreach ($value as $subKey => $subVal) {
+				// echo "\n SubKey: ". $subKey ." SubValue Length: " . count($subVal);
 					
-					if ($subKey == 'Ranges') {
-						
-						foreach ($subVal as $subKey2 =>$subVal2) {
-							echo "\n val: " . $subVal[$subKey2];
+				if ($subKey == 'Ranges') {
+					$nextKey = array_key_exists($key+1, $ranges) ? $ranges[$key+1] : null;
+					
+					if ($nextKey) {
+						if ($key == 0) {
+							echo    "<tr> <td>".$ranges[$key]." - ".$ranges[$key+1]."</td> <td>".$rates[$key]."%</td> </tr>";
+						} else {
+							echo    "<tr> <td>".$ranges[$key]. " - ".$ranges[$key+1]."</td> <td>$".$minTax[$key]." plus ".$rates[$key]."% of the amount over $".$ranges[$key]."</td> </tr>";
 						}
+					} else {
+						echo    "<tr> <td>".$ranges[$key]. " or more </td> <td>$".$minTax[$key]." plus ".$rates[$key]."% of the amount over $".$ranges[$key]."</td> </tr>";
 					}
+					
+					// foreach ($subVal as $subKey2 =>$subVal2) {
+					// 	echo "\n val: " . $subVal[$subKey2];
+					// }
 				}
 			}
 			
