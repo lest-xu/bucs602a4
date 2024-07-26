@@ -116,8 +116,6 @@ function incomeTax($taxableIncome, $status) {
 
     ?>
 
-
-
 		<h3>2019 Tax Tables</h3>
 
 		<?php
@@ -162,7 +160,6 @@ function incomeTax($taxableIncome, $status) {
 			echo    "<thead> <tr> <th>Texable Income</th> <th>Tax Rate</th> </tr> </thead><tbody>";
 			
             // loop through the ranges
-
             foreach ($ranges as $i => $rangeVal) {
 				// echo "\n Range index: ". $i ." Range Val: " . $rangeVal;
 
@@ -195,8 +192,6 @@ function incomeTax($taxableIncome, $status) {
             return '$'.number_format($val, 0);
         }
     ?>
-
-
 
 	</div>
 
