@@ -167,12 +167,12 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
 
             // get income from input
             $inputIncome = $_POST['netIncome'];
-            echo "<p>With a net taxable income of $". number_format($inputIncome,2) ."</p>";
+            echo "<p>With a net taxable income of $". moneyFormat($inputIncome) ."</p>";
             // calculate the income
-            $resultSingle = number_format(incomeTaxSingle($inputIncome),2);
-            $resultMarriedJ = number_format(incomeTaxMarriedJointly($inputIncome),2);
-            $resultMarriedS = number_format(incomeTaxMarriedSeparately($inputIncome),2);
-            $resultHead= number_format(incomeTaxHeadOfHousehold($inputIncome),2);
+            $resultSingle = moneyFormat(incomeTaxSingle($inputIncome));
+            $resultMarriedJ = moneyFormat(incomeTaxMarriedJointly($inputIncome));
+            $resultMarriedS = moneyFormat(incomeTaxMarriedSeparately($inputIncome));
+            $resultHead= moneyFormat(incomeTaxHeadOfHousehold($inputIncome));
 
             // create html table for results
             echo "<table class='table table-striped'>";
@@ -185,6 +185,10 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
 
         }
 
+        //// HELPER FUNCTIONS
+        function moneyFormat($val) {
+            return '$'.number_format($val, 2);
+        }
     ?>
 
 </div>
